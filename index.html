@@ -22,7 +22,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
-    font-size: 15px;
+    font-size: 19px;
     line-height: 1.7;
     min-height: 100vh;
   }
@@ -37,11 +37,11 @@
     gap: 1rem;
   }
 
-  .site-title { font-size: 13px; letter-spacing: 0.12em; color: var(--muted); }
-  .site-name { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
-  .site-sub { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-top: 2px; }
+  .site-title { font-size: 16px; letter-spacing: 0.12em; color: var(--muted); }
+  .site-name { font-size: 30px; font-weight: 500; letter-spacing: -0.01em; }
+  .site-sub { font-size: 14px; color: var(--muted); letter-spacing: 0.08em; margin-top: 4px; }
 
-  .legend { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+  .legend { font-size: 15px; color: var(--muted); text-align: right; line-height: 2; }
 
   .filter-bar {
     padding: 1.2rem 2rem;
@@ -56,11 +56,11 @@
     z-index: 10;
   }
 
-  .filter-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-right: 4px; }
+  .filter-label { font-size: 14px; color: var(--muted); letter-spacing: 0.08em; margin-right: 6px; }
 
   .cat-btn {
-    width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
-    font-size: 14px; font-weight: 500; font-family: inherit;
+    width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+    font-size: 19px; font-weight: 500; font-family: inherit;
     display: flex; align-items: center; justify-content: center;
     opacity: 0.35; transition: opacity 0.15s, transform 0.1s;
   }
@@ -74,24 +74,24 @@
   .btn-町 { background: var(--町); color: #EAF3DE; }
 
   .btn-all {
-    padding: 0 14px; height: 32px; border-radius: 16px; border: none;
+    padding: 0 20px; height: 44px; border-radius: 22px; border: none;
     background: var(--text); color: var(--bg); cursor: pointer;
-    font-size: 11px; font-family: inherit; letter-spacing: 0.06em; transition: opacity 0.15s;
+    font-size: 14px; font-family: inherit; letter-spacing: 0.06em; transition: opacity 0.15s;
   }
   .btn-all:hover { opacity: 0.75; }
 
-  .count { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .count { font-size: 14px; color: var(--muted); margin-left: auto; }
 
   .gallery {
     padding: 1.5rem 2rem 2rem;
-    columns: 4 260px;
-    column-gap: 14px;
+    columns: 3 420px;
+    column-gap: 18px;
   }
 
   .pic {
     break-inside: avoid;
-    margin-bottom: 14px;
-    border-radius: 10px;
+    margin-bottom: 18px;
+    border-radius: 12px;
     overflow: hidden;
     background: #fff;
     border: 0.5px solid var(--border);
@@ -103,25 +103,25 @@
 
   .pic img { width: 100%; display: block; background: #eee; }
 
-  .pic-body { padding: 10px 12px 12px; }
+  .pic-body { padding: 14px 16px 16px; }
 
-  .pic-cats { display: flex; gap: 4px; margin-bottom: 6px; }
+  .pic-cats { display: flex; gap: 6px; margin-bottom: 8px; }
   .cat-dot {
-    width: 20px; height: 20px; border-radius: 50%;
+    width: 28px; height: 28px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 500;
+    font-size: 14px; font-weight: 500;
   }
   .dot-認 { background: var(--認); color: #E6F1FB; }
   .dot-市 { background: var(--市); color: #FAEEDA; }
   .dot-語 { background: var(--語); color: #EEEDFE; }
   .dot-町 { background: var(--町); color: #EAF3DE; }
 
-  .pic-title { font-size: 13px; font-weight: 500; line-height: 1.5; }
+  .pic-title { font-size: 17px; font-weight: 500; line-height: 1.5; }
   .pic-meta {
-    display: flex; gap: 8px; font-size: 11px; color: var(--muted); margin-top: 5px; flex-wrap: wrap;
+    display: flex; gap: 10px; font-size: 14px; color: var(--muted); margin-top: 7px; flex-wrap: wrap;
   }
-  .pic-where { font-size: 12px; }
-  .pic-kw { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-top: 4px; }
+  .pic-where { font-size: 16px; }
+  .pic-kw { font-size: 14px; color: var(--muted); letter-spacing: 0.05em; margin-top: 6px; }
 
   .pic.hidden { display: none; }
 
@@ -135,18 +135,18 @@
   .lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 8px; }
   .lightbox-cap {
     position: absolute; bottom: 1.5rem; left: 0; right: 0; text-align: center;
-    color: #fff; font-size: 13px; padding: 0 2rem;
+    color: #fff; font-size: 17px; padding: 0 2rem;
   }
 
   footer {
-    padding: 2rem; text-align: center; font-size: 11px; color: var(--muted);
+    padding: 2rem; text-align: center; font-size: 14px; color: var(--muted);
     border-top: 0.5px solid var(--border);
   }
 
   @media (max-width: 600px) {
     header { padding: 1.5rem 1rem 1rem; }
     .filter-bar { padding: 1rem; }
-    .gallery { padding: 1rem; columns: 2 150px; column-gap: 10px; }
+    .gallery { padding: 1rem; columns: 1 280px; column-gap: 12px; }
   }
 </style>
 </head>

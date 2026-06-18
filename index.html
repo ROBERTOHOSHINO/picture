@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>picture.dunksoft.jp</title>
+<style>
+  :root {
+    --認: #378ADD;
+    --市: #BA7517;
+    --語: #534AB7;
+    --町: #3B6D11;
+    --bg: #FAFAF8;
+    --text: #1a1a18;
+    --muted: #6b6b66;
+    --border: rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    padding: 2.5rem 2rem 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .site-title { font-size: 13px; letter-spacing: 0.12em; color: var(--muted); }
+  .site-name { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .site-sub { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-top: 2px; }
+
+  .legend { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+  .filter-bar {
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 0.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .filter-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-right: 4px; }
+
+  .cat-btn {
+    width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 500; font-family: inherit;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.35; transition: opacity 0.15s, transform 0.1s;
+  }
+  .cat-btn.active { opacity: 1; }
+  .cat-btn:hover { transform: scale(1.1); opacity: 0.85; }
+  .cat-btn.active:hover { opacity: 1; }
+
+  .btn-認 { background: var(--認); color: #E6F1FB; }
+  .btn-市 { background: var(--市); color: #FAEEDA; }
+  .btn-語 { background: var(--語); color: #EEEDFE; }
+  .btn-町 { background: var(--町); color: #EAF3DE; }
+
+  .btn-all {
+    padding: 0 14px; height: 32px; border-radius: 16px; border: none;
+    background: var(--text); color: var(--bg); cursor: pointer;
+    font-size: 11px; font-family: inherit; letter-spacing: 0.06em; transition: opacity 0.15s;
+  }
+  .btn-all:hover { opacity: 0.75; }
+
+  .count { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+  .gallery {
+    padding: 1.5rem 2rem 2rem;
+    columns: 4 260px;
+    column-gap: 14px;
+  }
+
+  .pic {
+    break-inside: avoid;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    border: 0.5px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    display: block;
+  }
+  .pic:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+
+  .pic img { width: 100%; display: block; background: #eee; }
+
+  .pic-body { padding: 10px 12px 12px; }
+
+  .pic-cats { display: flex; gap: 4px; margin-bottom: 6px; }
+  .cat-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 500;
+  }
+  .dot-認 { background: var(--認); color: #E6F1FB; }
+  .dot-市 { background: var(--市); color: #FAEEDA; }
+  .dot-語 { background: var(--語); color: #EEEDFE; }
+  .dot-町 { background: var(--町); color: #EAF3DE; }
+
+  .pic-title { font-size: 13px; font-weight: 500; line-height: 1.5; }
+  .pic-meta {
+    display: flex; gap: 8px; font-size: 11px; color: var(--muted); margin-top: 5px; flex-wrap: wrap;
+  }
+  .pic-where { font-size: 12px; }
+  .pic-kw { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-top: 4px; }
+
+  .pic.hidden { display: none; }
+
+  /* lightbox */
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(20,20,18,0.92);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 2rem; cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 8px; }
+  .lightbox-cap {
+    position: absolute; bottom: 1.5rem; left: 0; right: 0; text-align: center;
+    color: #fff; font-size: 13px; padding: 0 2rem;
+  }
+
+  footer {
+    padding: 2rem; text-align: center; font-size: 11px; color: var(--muted);
+    border-top: 0.5px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .filter-bar { padding: 1rem; }
+    .gallery { padding: 1rem; columns: 2 150px; column-gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="site-title">DUNKSOFT</div>
+    <div class="site-name">picture</div>
+    <div class="site-sub">COLOURFUL AUTH KEY VISUAL</div>
+  </div>
+  <div class="legend">
+    認 <span style="color:var(--認);">●</span> 技術・認証<br>
+    市 <span style="color:var(--市);">●</span> Marketing・市づくり<br>
+    語 <span style="color:var(--語);">●</span> コラム・物語<br>
+    町 <span style="color:var(--町);">●</span> 文化・コミュニティ
+  </div>
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">絞り込み</span>
+  <button class="cat-btn btn-認 active" data-cat="認" onclick="toggleFilter('認')">認</button>
+  <button class="cat-btn btn-市 active" data-cat="市" onclick="toggleFilter('市')">市</button>
+  <button class="cat-btn btn-語 active" data-cat="語" onclick="toggleFilter('語')">語</button>
+  <button class="cat-btn btn-町 active" data-cat="町" onclick="toggleFilter('町')">町</button>
+  <button class="btn-all" onclick="resetFilter()">すべて</button>
+  <span class="count" id="count"></span>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-cap" id="lightbox-cap"></div>
+</div>
+
+<footer>picture.dunksoft.jp &nbsp;·&nbsp; COLOURFUL JAPAN</footer>
+
+<script>
+const CAT_COLORS = { '認':'dot-認', '市':'dot-市', '語':'dot-語', '町':'dot-町' };
+let allPics = [];
+let activeFilters = new Set(['認','市','語','町']);
+
+async function init() {
+  try {
+    const res = await fetch('./picture-index.json');
+    allPics = await res.json();
+    allPics.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    render();
+  } catch(e) {
+    document.getElementById('gallery').innerHTML = '<div style="padding:2rem;color:#999;">読み込み中...</div>';
+  }
+}
+
+function render() {
+  const gallery = document.getElementById('gallery');
+  const filtered = allPics.filter(p => {
+    const cats = (p.category || '').split('');
+    return cats.some(c => activeFilters.has(c));
+  });
+
+  document.getElementById('count').textContent = filtered.length + ' 枚';
+
+  gallery.innerHTML = filtered.map(p => {
+    const cats = (p.category || '').split('');
+    const dots = cats.map(c => `<div class="cat-dot ${CAT_COLORS[c] || ''}" title="${c}">${c}</div>`).join('');
+    const where = p.where ? `<span class="pic-where">${p.where}</span>` : '';
+    const kw = p.keywords ? `<div class="pic-kw">${p.keywords.split('').join(' ')}</div>` : '';
+    const encFile = encodeURIComponent(p.file);
+    return `<div class="pic" onclick="openLightbox('${encFile}','${(p.title||'').replace(/'/g,"\\'")}')">
+      <img loading="lazy" src="./${encFile}" alt="${p.title||''}">
+      <div class="pic-body">
+        <div class="pic-cats">${dots}</div>
+        <div class="pic-title">${p.title || ''}</div>
+        <div class="pic-meta">${where}<span>${p.date || ''}</span></div>
+        ${kw}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openLightbox(encFile, title) {
+  document.getElementById('lightbox-img').src = './' + encFile;
+  document.getElementById('lightbox-cap').textContent = title;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+function toggleFilter(cat) {
+  if (activeFilters.has(cat)) {
+    if (activeFilters.size === 1) return;
+    activeFilters.delete(cat);
+  } else {
+    activeFilters.add(cat);
+  }
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.classList.toggle('active', activeFilters.has(btn.dataset.cat));
+  });
+  render();
+}
+
+function resetFilter() {
+  activeFilters = new Set(['認','市','語','町']);
+  document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.add('active'));
+  render();
+}
+
+init();
+</script>
+</body>
+</html>
